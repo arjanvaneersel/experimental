@@ -1,0 +1,6 @@
+application: qanda-160507
+dispatch:
+  - url: "*/api/*"
+    module: api
+  - url: "*/*"
+    module: web

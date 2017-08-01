@@ -1,0 +1,36 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ .Title }}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    {{ template "navbar" . }}
+    <div class="container-fluid">
+      {{ if .Alerts }}
+      <div class="row">
+          <div class="col-sm-12 col-md-6 col-md-offset-3">
+              {{ range $index, $alert := .Alerts}}
+              <div class="alert alert-{{$alert.Class}} alert-dismissible alert-system" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>{{$alert.Title}}:</strong> {{ $alert.Message }}
+              </div>
+              {{ end }}
+          </div>
+      </div>
+      {{ end }}
+      {{ template "content" . }}
+    </div>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/static/js/vendors/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="/static/js/vendors/tinymce/tinymce.min.js"></script>
+
+    <script>tinymce.init({ selector:'.editor' });</script>
+  </body>
+</html>
+{{ end }}
